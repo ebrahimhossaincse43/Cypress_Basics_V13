@@ -10,28 +10,23 @@ describe('Alert Test', ()=>{
     let result = "//p[@id='result']"
     
     it('Test', () =>{
-        // cy.xpath(js_alert).click()
-        // cy.wait(3000)
-        // cy.xpath(result).should('have.text', 'You successfully clicked an alert')
-        // cy.wait(3000)
-        // cy.on('window:confirm', ()=>{
-        //     return true
-        // })
-        // cy.xpath(js_confirm).click()
-        // cy.wait(3000)
+        cy.xpath(js_alert).click()
+        cy.wait(3000)
+        cy.xpath(result).should('have.text', 'You successfully clicked an alert')
+        cy.wait(3000)
+
+
+        cy.on('window:confirm', ()=>{
+            return true
+        })
+        cy.xpath(js_confirm).click()
+        cy.wait(3000)
 
 
         cy.window().then(function($win){
             cy.stub($win, 'prompt').returns('Hello Prompt')
             cy.xpath(js_prompt).click()
         })
-
-        // cy.window().then(win => {
-        //     cy.stub(win, 'prompt').returns('This is a test text')
-        //     cy.contains('Click for JS Prompt').click()
-        //  })
-         
-        // cy.get('#result').should('have.text', 'You entered: This is a test text')
 
         })
 })
